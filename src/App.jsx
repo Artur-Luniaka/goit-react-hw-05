@@ -1,20 +1,24 @@
-import { lazy, useEffect, useState } from "react";
-import { fetchMovies } from "./assets/api";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import Navigation from "./components/Navigation/Navigation";
 
 const Home = lazy(() => import("./pages/HomePage/HomePage"));
+const Movies = lazy(() => import("./pages/MoviesPage/MoviesPage"));
+const MovieDetail = lazy(() =>
+  import("./pages/MovieDetailsPage/MovieDetailsPage")
+);
 
 const App = () => {
-  const [movies, setMovies] = useState(null);
-
-  useEffect(() => setMovies(fetchMovies()), []);
-  console.log(movies);
-
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <Navigation />
+      <Suspense>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies:movieId" element={<MovieDetail />} />
+        </Routes>
+      </Suspense>
     </>
   );
 };
