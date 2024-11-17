@@ -30,13 +30,21 @@ const MovieDetailsPage = () => {
           <BackLink to={backLink}>Go Back</BackLink>
           <h2>{movieWithId.title}</h2>
           <img
-            src={"https://image.tmdb.org/t/p/w500" + movieWithId.backdrop_path}
+            src={
+              movieWithId && movieWithId.backdrop_path
+                ? "https://image.tmdb.org/t/p/w500" + movieWithId.backdrop_path
+                : "https://via.placeholder.com/300"
+            }
             alt={movieWithId.title}
           />
           <p>Overview: {movieWithId.overview}</p>
           <p>Genres:{movieWithId.genres.map((genre) => genre.name)}</p>
-          <Link to="cast">Cast</Link>
-          <Link to="reviews">Reviews</Link>
+          <Link to="cast" state={{ from: location.state?.from }}>
+            Cast
+          </Link>
+          <Link to="reviews" state={{ from: location.state?.from }}>
+            Reviews
+          </Link>
           <Outlet />
         </div>
       )}
