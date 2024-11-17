@@ -1,14 +1,13 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { fetchMovieById } from "../../assets/api";
 import { useEffect, useState } from "react";
 import BackLink from "../../components/BackLink/BackLink";
-import MovieCast from "../../components/MovieCast/MovieCast";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movieWithId, setMovieWithID] = useState(null);
   const location = useLocation();
-  const backLink = location.state ?? "/";
+  const backLink = location.state?.from || "/";
 
   useEffect(() => {
     const fetchMovieWithId = async () => {
@@ -29,7 +28,6 @@ const MovieDetailsPage = () => {
       ) : (
         <div>
           <BackLink to={backLink}>Go Back</BackLink>
-          <Link to={`/movies/${movieWithId.id}`} />
           <h2>{movieWithId.title}</h2>
           <img
             src={"https://image.tmdb.org/t/p/w500" + movieWithId.backdrop_path}
@@ -37,7 +35,9 @@ const MovieDetailsPage = () => {
           />
           <p>Overview: {movieWithId.overview}</p>
           <p>Genres:{movieWithId.genres.map((genre) => genre.name)}</p>
-          <MovieCast />
+          <Link to="cast">Cast</Link>
+          <Link to="reviews">Reviews</Link>
+          <Outlet />
         </div>
       )}
     </div>
