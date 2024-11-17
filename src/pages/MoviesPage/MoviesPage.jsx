@@ -2,6 +2,7 @@ import { Field, Formik, Form } from "formik";
 import { useEffect, useState } from "react";
 import { fetchMovieSearch } from "../../assets/api";
 import MovieList from "../../components/MovieList/MovieList";
+import { useSearchParams } from "react-router-dom";
 
 const initialValues = { query: "" };
 
@@ -10,11 +11,14 @@ const MoviesPage = () => {
   const [searchMovies, setSearchMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const request = searchParams.get("query");
+  const currentPage = searchParams.get("page");
 
   const handleSubmit = (values, actions) => {
     setQuery(values.query);
     actions.resetForm();
-    console.log(values);
   };
 
   const handlePageNextBtn = () => {
@@ -32,13 +36,20 @@ const MoviesPage = () => {
         const { results, total_pages } = await fetchMovieSearch(query, page);
         setSearchMovies(results);
         setTotalPages(total_pages);
+        setSearchParams(`query=${query}&page=${page}`);
       } catch (err) {
         console.log(err);
       }
     };
     fetchSearch();
-  }, [query, page]);
-  console.log(searchMovies);
+  }, [query, page, setSearchParams, searchParams]);
+
+  useEffect(() => {
+    if (request && currentPage) {
+      setPage(Number(currentPage));
+      setQuery(request);
+    }
+  }, [request, currentPage]);
 
   return (
     <div>
@@ -56,7 +67,7 @@ const MoviesPage = () => {
       {searchMovies.length > 0 ? (
         <div>
           <p>
-            Page:{page} / {totalPages}
+            Page: {page} / {totalPages}
           </p>
           {page > 1 ? <button onClick={handlePageBackBtn}>Back</button> : ""}
           {page !== totalPages ? (
