@@ -13,6 +13,7 @@
   border: 2px solid white;
   outline: none;
   transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  width: 235px;
   &:hover,
   &:focus {
     border: 2px solid blueviolet;

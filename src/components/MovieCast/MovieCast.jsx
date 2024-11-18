@@ -16,7 +16,6 @@ const MovieCast = () => {
         console.error(err);
       }
     };
-
     fetchMovieCredits();
   }, [movieId]);
 

@@ -7,6 +7,7 @@ import s from "./MoviesPage.module.css";
 import { MdContentPasteSearch } from "react-icons/md";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { GrNext } from "react-icons/gr";
+import Loader from "../../components/Loader/Loader";
 
 const initialValues = { query: "" };
 
@@ -16,6 +17,7 @@ const MoviesPage = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loader, setLoader] = useState(false);
 
   const request = searchParams.get("query");
   const currentPage = searchParams.get("page");
@@ -26,10 +28,18 @@ const MoviesPage = () => {
   };
 
   const handlePageNextBtn = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     setPage(page + 1);
   };
 
   const handlePageBackBtn = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     setPage(page - 1);
   };
 
@@ -37,12 +47,15 @@ const MoviesPage = () => {
     if (!query) return;
     const fetchSearch = async () => {
       try {
+        setLoader(true);
         const { results, total_pages } = await fetchMovieSearch(query, page);
         setSearchMovies(results);
         setTotalPages(total_pages);
         setSearchParams(`query=${query}&page=${page}`);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoader(false);
       }
     };
     fetchSearch();
@@ -71,6 +84,7 @@ const MoviesPage = () => {
           </button>
         </Form>
       </Formik>
+      {loader && <Loader />}
       <MovieList movies={searchMovies} />
       {searchMovies.length > 0 ? (
         <div className={s.bottom_wrapper}>

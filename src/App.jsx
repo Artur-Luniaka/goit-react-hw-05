@@ -20,7 +20,9 @@ const App = () => {
   return (
     <>
       <Navigation />
-      <Suspense fallback={<MagnifyingGlass />}>
+      <Suspense
+        fallback={<MagnifyingGlass wrapperStyle={{ margin: "0 auto" }} />}
+      >
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="movies" element={<MoviesPage />} />
