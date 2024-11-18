@@ -1,6 +1,9 @@
+import "modern-normalize";
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
+import "./App.css";
+import { Triangle } from "react-loader-spinner";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
@@ -16,7 +19,16 @@ const App = () => {
   return (
     <>
       <Navigation />
-      <Suspense>
+      <Suspense
+        fallback={
+          <Triangle
+            wrapperStyle={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          />
+        }
+      >
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="movies" element={<MoviesPage />} />
