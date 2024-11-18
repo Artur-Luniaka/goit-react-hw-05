@@ -12,6 +12,7 @@ body {
 body {
   line-height: 1.5;
   font-family: sans-serif;
+  background-color: #ffe4c4; /* Кремовый цвет */
 }
 
 img,
@@ -42,10 +43,10 @@ ul {
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 20px;
 }
 
-.loader {
+.magnifying-glass-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
