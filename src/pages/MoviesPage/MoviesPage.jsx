@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { fetchMovieSearch } from "../../assets/api";
 import MovieList from "../../components/MovieList/MovieList";
 import { useSearchParams } from "react-router-dom";
+import s from "./MoviesPage.module.css";
+import { MdContentPasteSearch } from "react-icons/md";
+import { RiArrowGoBackFill } from "react-icons/ri";
+import { GrNext } from "react-icons/gr";
 
 const initialValues = { query: "" };
 
@@ -17,7 +21,7 @@ const MoviesPage = () => {
   const currentPage = searchParams.get("page");
 
   const handleSubmit = (values, actions) => {
-    setQuery(values.query);
+    setQuery(values.query.toLowerCase().trim());
     actions.resetForm();
   };
 
@@ -54,24 +58,36 @@ const MoviesPage = () => {
   return (
     <div>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form>
+        <Form className={s.form}>
           <Field
             type="text"
             placeholder="Enter keyword to search..."
             name="query"
+            className={s.input}
           />
-          <button type="submit">Search</button>
+          <button className={s.btn} type="submit">
+            Search
+            <MdContentPasteSearch />
+          </button>
         </Form>
       </Formik>
       <MovieList movies={searchMovies} />
       {searchMovies.length > 0 ? (
-        <div>
-          <p>
-            Page: {page} / {totalPages}
+        <div className={s.bottom_wrapper}>
+          <p className={s.page}>
+            Page: <span className={s.page_accent}>{page}</span> / {totalPages}
           </p>
-          {page > 1 ? <button onClick={handlePageBackBtn}>Back</button> : ""}
+          {page > 1 ? (
+            <button className={s.btn} onClick={handlePageBackBtn}>
+              <RiArrowGoBackFill /> Back
+            </button>
+          ) : (
+            ""
+          )}
           {page !== totalPages ? (
-            <button onClick={handlePageNextBtn}>Next Page</button>
+            <button className={s.btn} onClick={handlePageNextBtn}>
+              Next <GrNext />
+            </button>
           ) : (
             ""
           )}

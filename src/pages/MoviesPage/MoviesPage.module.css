@@ -1,34 +1,29 @@
-.title {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.form {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   margin-bottom: 15px;
 }
 
-.img {
-  object-fit: contain;
-  width: 700px;
-  height: auto;
-  margin: 0 auto;
+.input {
+  background-color: transparent;
+  padding: 5px 10px;
   border-radius: 8px;
-  margin-bottom: 15px;
+  border: 2px solid white;
+  outline: none;
+  transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:hover,
+  &:focus {
+    border: 2px solid blueviolet;
+  }
+  &::placeholder {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: lightcoral;
+  }
 }
 
-.page_accent {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.page {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-style: italic;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.link_btn {
+.btn {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: flex;
   justify-content: center;
@@ -40,7 +35,6 @@
   color: lightcoral;
   border: 2px solid white;
   outline: none;
-  max-width: 110px;
   transition: color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1),
     border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   &:hover,
@@ -50,9 +44,19 @@
   }
 }
 
-.link_btn_box {
+.page {
+  order: 1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: lightcoral;
+}
+
+.page_accent {
+  color: blueviolet;
+}
+
+.bottom_wrapper {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 15px;
 }

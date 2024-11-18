@@ -2,6 +2,9 @@ import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { fetchMovieById } from "../../assets/api";
 import { useEffect, useState } from "react";
 import BackLink from "../../components/BackLink/BackLink";
+import s from "./MovieDetailsPage.module.css";
+import { RiTeamLine } from "react-icons/ri";
+import { MdOutlineReviews } from "react-icons/md";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -28,23 +31,42 @@ const MovieDetailsPage = () => {
       ) : (
         <div>
           <BackLink to={backLink}>Go Back</BackLink>
-          <h2>{movieWithId.title}</h2>
+          <h2 className={s.title}>{movieWithId.title}</h2>
           <img
             src={
               movieWithId && movieWithId.backdrop_path
                 ? "https://image.tmdb.org/t/p/w500" + movieWithId.backdrop_path
-                : "https://via.placeholder.com/300"
+                : "https://via.placeholder.com/700x400"
             }
             alt={movieWithId.title}
+            className={s.img}
           />
-          <p>Overview: {movieWithId.overview}</p>
-          <p>Genres:{movieWithId.genres.map((genre) => genre.name)}</p>
-          <Link to="cast" state={{ from: location.state?.from }}>
-            Cast
-          </Link>
-          <Link to="reviews" state={{ from: location.state?.from }}>
-            Reviews
-          </Link>
+          <p className={s.page}>
+            <span className={s.page_accent}>Overview:</span>{" "}
+            {movieWithId.overview}
+          </p>
+          <p className={s.page}>
+            <span className={s.page_accent}>Genres:</span>{" "}
+            {movieWithId.genres.map((genre) => genre.name + " / ")}
+          </p>
+          <span className={s.link_btn_box}>
+            <Link
+              className={s.link_btn}
+              to="cast"
+              state={{ from: location.state?.from }}
+            >
+              Cast
+              <RiTeamLine />
+            </Link>
+            <Link
+              className={s.link_btn}
+              to="reviews"
+              state={{ from: location.state?.from }}
+            >
+              Reviews
+              <MdOutlineReviews />
+            </Link>
+          </span>
           <Outlet />
         </div>
       )}

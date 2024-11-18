@@ -1,0 +1,32 @@
+.info {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.li {
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.author {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.comment {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  font-style: italic;
+}
