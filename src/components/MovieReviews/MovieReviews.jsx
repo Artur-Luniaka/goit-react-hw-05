@@ -18,6 +18,14 @@ const MovieReviews = () => {
     };
     fetchReviews();
   }, [movieId]);
+
+  useEffect(() => {
+    const handlePageTitle = () => {
+      document.title = "Movie Details || Reviews";
+    };
+    handlePageTitle();
+  });
+
   return (
     <div>
       {!movieReview || movieReview.results.length === 0 ? (

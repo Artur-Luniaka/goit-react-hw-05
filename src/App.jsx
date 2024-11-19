@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import "./App.css";
 import { MagnifyingGlass } from "react-loader-spinner";
+import Footer from "./components/Footer/Footer";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
@@ -18,22 +19,25 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 const App = () => {
   return (
-    <>
+    <div className="app-wrapper">
       <Navigation />
-      <Suspense
-        fallback={<MagnifyingGlass wrapperStyle={{ margin: "0 auto" }} />}
-      >
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="movies" element={<MoviesPage />} />
-          <Route path="movies/:movieId" element={<MovieDetailsPage />}>
-            <Route path="cast" element={<MovieCast />} />
-            <Route path="reviews" element={<MovieReviews />} />
-          </Route>
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
-    </>
+      <div className="content-wrapper">
+        <Suspense
+          fallback={<MagnifyingGlass wrapperStyle={{ margin: "0 auto" }} />}
+        >
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="movies" element={<MoviesPage />} />
+            <Route path="movies/:movieId" element={<MovieDetailsPage />}>
+              <Route path="cast" element={<MovieCast />} />
+              <Route path="reviews" element={<MovieReviews />} />
+            </Route>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+      </div>
+      <Footer />
+    </div>
   );
 };
 

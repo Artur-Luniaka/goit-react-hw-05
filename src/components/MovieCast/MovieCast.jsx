@@ -19,6 +19,13 @@ const MovieCast = () => {
     fetchMovieCredits();
   }, [movieId]);
 
+  useEffect(() => {
+    const handlePageTitle = () => {
+      document.title = "Movie Details || Cast";
+    };
+    handlePageTitle();
+  });
+
   return (
     <div>
       {!movieCast || movieCast.cast.length === 0 ? (

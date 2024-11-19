@@ -24,6 +24,13 @@ const MovieDetailsPage = () => {
     fetchMovieWithId();
   }, [movieId]);
 
+  useEffect(() => {
+    const handlePageTitle = () => {
+      document.title = "Movie Details";
+    };
+    handlePageTitle();
+  });
+
   return (
     <div>
       {!movieWithId ? (

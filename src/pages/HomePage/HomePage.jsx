@@ -19,12 +19,21 @@ const HomePage = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const handlePageTitle = () => {
+      document.title = "Top Movies || Home";
+    };
+    handlePageTitle();
+  });
+
   return (
     <>
       <h1 className={s.title}>
-        <MdMovieFilter />
-        Watch Top 20 films right now
-        <MdMovieFilter />
+        <span className={s.title_box}>
+          <MdMovieFilter />
+          Watch Top 20 films right now
+          <MdMovieFilter />
+        </span>
       </h1>
       <MovieList movies={movies} />
     </>

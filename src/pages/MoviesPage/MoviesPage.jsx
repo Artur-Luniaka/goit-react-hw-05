@@ -68,6 +68,13 @@ const MoviesPage = () => {
     }
   }, [request, currentPage]);
 
+  useEffect(() => {
+    const handlePageTitle = () => {
+      document.title = "Top Movies || Movies Page";
+    };
+    handlePageTitle();
+  });
+
   return (
     <div>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
